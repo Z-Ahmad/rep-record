@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="App bg-gray-900 min-h-screen flex flex-col justify-between p-4 items-center overflow-hidden">
       <Nav/>
-      <div className="flex flex-col md:flex-row justify-center items-center align-middle gap-4 h-screen mb-[-6.5rem]">
+      <div className="flex flex-col justify-center items-center align-middle gap-4 h-screen mb-[-6.5rem] mt-[-4rem]">
         <BenchInput />
         <DeadliftInput />
         <SquatInput />

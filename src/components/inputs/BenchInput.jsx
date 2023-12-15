@@ -5,8 +5,8 @@ import LiftInput from "./LiftInput";
 const BenchInput = () => {
   return (
     <LiftInput 
-      icon={<BenchIcon fill="orange" 
-      className="h-10 w-10" />}
+      icon={<BenchIcon 
+      className="fill-orange-500 h-10 w-10"/>}
       liftName="Bench Press" />
   );
 };
