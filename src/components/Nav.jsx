@@ -1,4 +1,5 @@
 import React from 'react'
+import LoginButton from './LoginButton'
 
 const Nav = () => {
   return (
@@ -7,7 +8,7 @@ const Nav = () => {
         <span>
           Rep Record
         </span>
-        <button className='bg-orange-600 hover:bg-orange-700 transition-all px-4 py-1 rounded-md'>Login</button>
+          <LoginButton/>
       </div>
     </nav>
   )
