@@ -1,8 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithPopup, signOut, GoogleAuthProvider } from "firebase/auth";
+import {getFirestore, collection, addDoc} from "firebase/firestore"
 
 const firebaseConfig = {
-  apiKey: process.env.AUTH_API_KEY,
+  apiKey: "AIzaSyDz293oeqjExoAV7rWmMmc1NxoXH3Dy81A",
   authDomain: "rep-record.firebaseapp.com",
   projectId: "rep-record",
   storageBucket: "rep-record.appspot.com",
@@ -18,6 +19,7 @@ provider.setCustomParameters({
 });
 
 export const auth = getAuth();
+export const db = getFirestore(firebaseApp)
 
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
