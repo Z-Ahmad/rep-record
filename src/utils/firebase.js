@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, signInWithPopup, signOut, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDz293oeqjExoAV7rWmMmc1NxoXH3Dy81A",
+  apiKey: process.env.AUTH_API_KEY,
   authDomain: "rep-record.firebaseapp.com",
   projectId: "rep-record",
   storageBucket: "rep-record.appspot.com",

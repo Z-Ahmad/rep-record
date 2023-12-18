@@ -5,7 +5,7 @@ const Nav = () => {
   return (
     <nav className='text-white w-screen px-4'>
       <div className='flex justify-between'>
-        <span>
+        <span className='text-orange-500 font-bold text-lg'>
           Rep Record
         </span>
           <LoginButton/>
