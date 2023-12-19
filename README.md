@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# Rep Record
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Rep Record is a simple web app for tracking lifting statistics, including bench press, squat, and deadlift. Users can log their sets, reps, and weights for each exercise.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **User Authentication:** Log in using your Google account to start tracking your lifts.
+- **Lift Tracking:** Record your sets, reps, and weights for bench press, squat, and deadlift.
+- **Unit Conversion:** Easily switch between pounds and kilograms for weight tracking.
+- **Firebase Integration:** User authentication and lift data storage are handled using Firebase and Firestore.
 
-### `npm start`
+## Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Clone the repository.
+   ```bash
+   git clone https://github.com/Z-Ahmad/rep-record
+   ```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+2. Install dependencies.
+   ```bash
+   cd rep-record
+   npm install
+   ```
 
-### `npm test`
+3. Set up Firebase:
+   - Create a Firebase project on the [Firebase Console](https://console.firebase.google.com/).
+   - Add a web app to your project and replace the Firebase configuration in `src/utils/firebase.js` with your own configuration.
+   - Enable Google authentication in the Firebase Console.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+4. Run the app locally.
+   ```bash
+   npm start
+   ```
 
-### `npm run build`
+## Usage
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Visit the live site: [Rep Record App](https://rep-record.vercel.app/)
+- Log in with your Google account.
+- Start tracking your lifts by entering sets, reps, and weights.
