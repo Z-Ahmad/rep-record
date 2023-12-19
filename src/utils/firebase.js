@@ -21,13 +21,19 @@ provider.setCustomParameters({
 export const auth = getAuth();
 export const db = getFirestore(firebaseApp)
 
+let currentUser = auth.currentUser;
+
+auth.onAuthStateChanged(user => {
+  currentUser = user;
+});
+
 export const signInWithGooglePopup = async () => {
   try {
     await signInWithPopup(auth, provider);
     //get user id
     console.log("User signed in successfully");
-    const user = auth.currentUser;
-    await createUserDocument(user);
+    console.log("UID: ", currentUser.uid)
+    await createUserDocument(currentUser);
   } catch (error) {
     console.error("Error signing in:", error);
   }
@@ -42,8 +48,8 @@ export const signOutUser = async () => {
   }
 };
 
-export const createUserDocument = async (user) => {
-  const docRef = doc(db, "users", user.uid);
+export const createUserDocument = async () => {
+  const docRef = doc(db, "users", currentUser.uid);
   const docSnap = await getDoc(docRef);
   if (!docSnap.exists()) {
     await setDoc(docRef, {
@@ -71,4 +77,14 @@ export const createUserDocument = async (user) => {
   }
 }
 
+export const getUserDocument = async () => {
+  const docRef = doc(db, "users", currentUser.uid);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    console.log("User document data:", docSnap.data());
+    return docSnap.data();
+  } else {
+    console.log("No such document!");
+  }
+}
 

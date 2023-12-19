@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { auth } from "./utils/firebase";
+import { auth, db, getUserDocument } from "./utils/firebase";
 
 const UserContext = createContext();
 
@@ -7,15 +7,14 @@ export const useUserContext = () => useContext(UserContext);
 
 export const UserContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [userToken, setUserToken] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((authUser) => {
-      setUser(authUser);
+    const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
       if (authUser) {
-        authUser.getIdToken().then((token) => setUserToken(token));
+        const userData = await getUserDocument();
+        setUser({ id: authUser.uid, ...userData });
       } else {
-        setUserToken(null);
+        setUser(null);
       }
     });
 
@@ -23,8 +22,7 @@ export const UserContextProvider = ({ children }) => {
   }, []);
 
   const contextValue = {
-    user,
-    userToken
+    user
   };
 
   return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>;
