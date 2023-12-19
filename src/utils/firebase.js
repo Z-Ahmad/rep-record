@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithPopup, signOut, GoogleAuthProvider } from "firebase/auth";
-import {getFirestore, collection, addDoc} from "firebase/firestore"
+import {getFirestore, collection, setDoc, getDoc, doc} from "firebase/firestore"
 
 const firebaseConfig = {
   apiKey: "AIzaSyDz293oeqjExoAV7rWmMmc1NxoXH3Dy81A",
@@ -21,7 +21,17 @@ provider.setCustomParameters({
 export const auth = getAuth();
 export const db = getFirestore(firebaseApp)
 
-export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+export const signInWithGooglePopup = async () => {
+  try {
+    await signInWithPopup(auth, provider);
+    //get user id
+    console.log("User signed in successfully");
+    const user = auth.currentUser;
+    await createUserDocument(user);
+  } catch (error) {
+    console.error("Error signing in:", error);
+  }
+}
 
 export const signOutUser = async () => {
   try {
@@ -31,3 +41,34 @@ export const signOutUser = async () => {
     console.error("Error signing out:", error);
   }
 };
+
+export const createUserDocument = async (user) => {
+  const docRef = doc(db, "users", user.uid);
+  const docSnap = await getDoc(docRef);
+  if (!docSnap.exists()) {
+    await setDoc(docRef, {
+      liftData: {
+        bench: {
+          weight: 0,
+          reps: 0,
+          sets: 0
+        },
+        deadlift: {
+          weight: 0,
+          reps: 0,
+          sets: 0
+        },
+        squat: {
+          weight: 0,
+          reps: 0,
+          sets: 0
+        }
+      }
+    });
+    console.log("New user document created");
+  } else {
+    console.log("User document already exists");
+  }
+}
+
+
