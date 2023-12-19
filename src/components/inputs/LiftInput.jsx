@@ -1,12 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { getUserDocument} from "../../utils/firebase";
+import { useUserContext } from "../../UserContext";
 import {ReactComponent as LbsIcon} from '../../icons/lbs-icon.svg'
 import {ReactComponent as KgIcon} from '../../icons/kg-icon.svg'
+import {ReactComponent as SaveIcon} from '../../icons/save-icon.svg'
 
 const LiftInput = ({ icon, liftName }) => {
+  const {user} = useUserContext();
   const [sets, setSets] = useState(0);
   const [reps, setReps] = useState(0);
   const [weight, setWeight] = useState(0);
   const [units, setUnits] = useState("lbs")
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if(user){
+        let lift = liftName.toLowerCase();
+        if(lift === 'bench press'){
+          lift = 'bench'
+        }
+        const userDoc = await getUserDocument(user.uid);
+        //display lift data of current lift
+        console.log(userDoc.liftData[lift]);
+        setSets(userDoc.liftData[lift].sets);
+        setReps(userDoc.liftData[lift].reps);
+        setWeight(userDoc.liftData[lift].weight);
+        setUnits(userDoc.liftData[lift].units);
+      }
+    };
+
+    fetchData();
+  }, [user]);
 
   const handleSetsChange = (e) => setSets(e.target.value);
   const handleRepsChange = (e) => setReps(e.target.value);
@@ -27,6 +51,16 @@ const LiftInput = ({ icon, liftName }) => {
       setUnits("lbs");
     }
   };
+
+  const handleSubmitData = () => {
+    const data = {
+      sets: sets,
+      reps: reps,
+      weight: weight,
+      units: units,
+    };
+    console.log(data);
+  }
 
   return (
     <div className="flex flex-col gap-2 bg-slate-800 p-4 md:px-28 justify-center rounded-lg">
@@ -90,6 +124,11 @@ const LiftInput = ({ icon, liftName }) => {
             <KgIcon className="fill-orange-500 h-9 w-9 -mt-2 hover:cursor-pointer 
               hover:fill-orange-600 transition-all"/>
           }
+        </div>
+
+        <div onClick={handleSubmitData}>
+          <SaveIcon className="fill-orange-500 h-6 w-6 mt-[.125rem] hover:cursor-pointer 
+            hover:fill-orange-600 transition-all"/>
         </div>
       </div>
     </div>

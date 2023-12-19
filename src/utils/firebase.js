@@ -57,17 +57,20 @@ export const createUserDocument = async () => {
         bench: {
           weight: 0,
           reps: 0,
-          sets: 0
+          sets: 0,
+          units: "lbs"
         },
         deadlift: {
           weight: 0,
           reps: 0,
-          sets: 0
+          sets: 0,
+          units: "lbs"
         },
         squat: {
           weight: 0,
           reps: 0,
-          sets: 0
+          sets: 0,
+          units: "lbs"
         }
       }
     });
@@ -88,3 +91,22 @@ export const getUserDocument = async () => {
   }
 }
 
+export const updateLiftData = async (lift, weight, reps, sets) => {
+  const docRef = doc(db, "users", currentUser.uid);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    await setDoc(docRef, {
+      liftData: {
+        ...docSnap.data().liftData,
+        [lift]: {
+          weight: weight,
+          reps: reps,
+          sets: sets
+        }
+      }
+    });
+    console.log("Lift data updated");
+  } else {
+    console.log("No such document!");
+  }
+}
