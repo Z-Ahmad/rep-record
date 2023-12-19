@@ -57,7 +57,6 @@ const LiftInput = ({ icon, liftName }) => {
     if (lift === "bench press") {
       lift = "bench";
     }
-    console.log("lift: ", lift, "sets: ", sets, "weight: ", weight, "units: ", units)
     const uploadData = { lift, weight, sets, reps, units };
     updateLiftData(uploadData);
   }

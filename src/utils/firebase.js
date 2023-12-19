@@ -92,9 +92,10 @@ export const getUserDocument = async () => {
 }
 
 export const updateLiftData = async ({lift, weight, sets, reps, units}) => {
-  const docRef = doc(db, "users", currentUser.uid);
-  const docSnap = await getDoc(docRef);
-  if (docSnap.exists()) {
+  if(currentUser !== null){
+    const docRef = doc(db, "users", currentUser.uid);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
     await setDoc(docRef, {
       liftData: {
         ...docSnap.data().liftData,
@@ -107,7 +108,8 @@ export const updateLiftData = async ({lift, weight, sets, reps, units}) => {
       }
     });
     console.log("Lift data updated");
-  } else {
-    console.log("No such document!");
+    } else {
+      console.log("No such document!");
+    }
   }
 }
