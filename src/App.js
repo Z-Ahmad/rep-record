@@ -5,6 +5,7 @@ import DeadliftInput from "./components/inputs/DeadliftInput";
 import SquatInput from "./components/inputs/SquatInput";
 import Nav from "./components/Nav";
 import { UserContextProvider } from "./UserContext";
+import toast, {Toaster} from 'react-hot-toast';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         </div>
         <Footer/>
       </div>
+      <Toaster/>
     </UserContextProvider>
   );
 }

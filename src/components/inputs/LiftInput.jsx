@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { getUserDocument, updateLiftData} from "../../utils/firebase";
 import { useUserContext } from "../../UserContext";
+import toast from 'react-hot-toast';
+
 import {ReactComponent as LbsIcon} from '../../icons/lbs-icon.svg'
 import {ReactComponent as KgIcon} from '../../icons/kg-icon.svg'
 import {ReactComponent as SaveIcon} from '../../icons/save-icon.svg'
@@ -59,7 +61,12 @@ const LiftInput = ({ icon, liftName }) => {
       lift = "bench";
     }
     const uploadData = { lift, weight, sets, reps, units };
-    updateLiftData(uploadData);
+    const updatePromise = updateLiftData(uploadData);
+    toast.promise(updatePromise, {
+      loading: "Saving...",
+      success: "Saved!",
+      error: "Error saving data",
+    });
   }
 
   return (

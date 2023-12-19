@@ -1,6 +1,9 @@
 import React from 'react'
 import { signInWithGooglePopup, signOutUser } from "../utils/firebase";
 import { useUserContext } from '../UserContext';
+import toast from 'react-hot-toast';
+
+const notifyLogin = () => toast.success('Successfully logged in!');
 
 const LoginButton = () => {
   const { user } = useUserContext();
@@ -13,7 +16,12 @@ const LoginButton = () => {
     } else {
       // User is not authenticated, perform login
       try {
-        await signInWithGooglePopup();
+        const loginPromise = signInWithGooglePopup();
+        toast.promise(loginPromise, {
+          loading: 'Logging in...',
+          success: 'Logged in!',
+          error: 'Could not log in'
+        })
       } catch (error) {
         console.error("Error signing in:", error);
       }
