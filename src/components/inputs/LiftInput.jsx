@@ -13,6 +13,7 @@ const LiftInput = ({ icon, liftName }) => {
   const [units, setUnits] = useState("lbs")
 
   useEffect(() => {
+    // console.log(user)
     const fetchData = async () => {
       if(user){
         let lift = liftName.toLowerCase();
@@ -111,24 +112,30 @@ const LiftInput = ({ icon, liftName }) => {
             onChange={handleWeightChange}
           />
           <label htmlFor={`${liftName.toLowerCase()}-input-weight`} className="text-white">
-            {units === 'lbs' ? 'lbs' : 'kg'}
+            {units === "lbs" ? "lbs" : "kg"}
           </label>
         </div>
 
         <div onClick={handleUnitChange}>
-          {units === 'lbs' ? 
-            <LbsIcon className="fill-orange-500 h-9 w-9 -mt-2 
-              hover:cursor-pointer hover:fill-orange-600 transition-all"/> 
-            : 
-            <KgIcon className="fill-orange-500 h-9 w-9 -mt-2 hover:cursor-pointer 
-              hover:fill-orange-600 transition-all"/>
-          }
+          {units === "lbs" ? (
+            <LbsIcon
+              className="fill-orange-500 h-9 w-9 -mt-2 
+              hover:cursor-pointer hover:fill-orange-600 transition-all"
+            />
+          ) : (
+            <KgIcon
+              className="fill-orange-500 h-9 w-9 -mt-2 hover:cursor-pointer 
+              hover:fill-orange-600 transition-all"
+            />
+          )}
         </div>
-
-        <div onClick={handleSubmitData}>
-          <SaveIcon className="fill-orange-500 h-6 w-6 mt-[.125rem] hover:cursor-pointer 
-            hover:fill-orange-600 transition-all"/>
-        </div>
+        {user && 
+          <div onClick={handleSubmitData}>
+            <SaveIcon className="fill-orange-500 h-6 w-6 mt-[.125rem] hover:cursor-pointer 
+              hover:fill-orange-600 transition-all"
+              />
+          </div>
+        }
       </div>
     </div>
   );
