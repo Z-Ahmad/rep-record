@@ -5,7 +5,6 @@ import DeadliftInput from "./components/inputs/DeadliftInput";
 import SquatInput from "./components/inputs/SquatInput";
 import Nav from "./components/Nav";
 import { UserContextProvider } from "./UserContext";
-import SubmitButton from "./components/SubmitButton";
 
 function App() {
   return (
@@ -16,7 +15,6 @@ function App() {
           <BenchInput />
           <DeadliftInput />
           <SquatInput />
-          <SubmitButton/>
         </div>
         <Footer/>
       </div>

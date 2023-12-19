@@ -32,7 +32,7 @@ export const signInWithGooglePopup = async () => {
     await signInWithPopup(auth, provider);
     //get user id
     console.log("User signed in successfully");
-    console.log("UID: ", currentUser.uid)
+    // console.log("UID: ", currentUser.uid)
     await createUserDocument(currentUser);
   } catch (error) {
     console.error("Error signing in:", error);
@@ -91,7 +91,7 @@ export const getUserDocument = async () => {
   }
 }
 
-export const updateLiftData = async (lift, weight, reps, sets) => {
+export const updateLiftData = async ({lift, weight, sets, reps, units}) => {
   const docRef = doc(db, "users", currentUser.uid);
   const docSnap = await getDoc(docRef);
   if (docSnap.exists()) {
@@ -99,9 +99,10 @@ export const updateLiftData = async (lift, weight, reps, sets) => {
       liftData: {
         ...docSnap.data().liftData,
         [lift]: {
-          weight: weight,
-          reps: reps,
-          sets: sets
+          weight: Number(weight),
+          reps: Number(reps),
+          sets: Number(sets),
+          units: String(units)
         }
       }
     });

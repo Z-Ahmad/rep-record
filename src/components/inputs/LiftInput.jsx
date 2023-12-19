@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getUserDocument} from "../../utils/firebase";
+import { getUserDocument, updateLiftData} from "../../utils/firebase";
 import { useUserContext } from "../../UserContext";
 import {ReactComponent as LbsIcon} from '../../icons/lbs-icon.svg'
 import {ReactComponent as KgIcon} from '../../icons/kg-icon.svg'
@@ -19,9 +19,9 @@ const LiftInput = ({ icon, liftName }) => {
         if(lift === 'bench press'){
           lift = 'bench'
         }
-        const userDoc = await getUserDocument(user.uid);
+        const userDoc = await getUserDocument();
         //display lift data of current lift
-        console.log(userDoc.liftData[lift]);
+        // console.log(userDoc.liftData[lift]);
         setSets(userDoc.liftData[lift].sets);
         setReps(userDoc.liftData[lift].reps);
         setWeight(userDoc.liftData[lift].weight);
@@ -53,13 +53,13 @@ const LiftInput = ({ icon, liftName }) => {
   };
 
   const handleSubmitData = () => {
-    const data = {
-      sets: sets,
-      reps: reps,
-      weight: weight,
-      units: units,
-    };
-    console.log(data);
+    let lift = liftName.toLowerCase();
+    if (lift === "bench press") {
+      lift = "bench";
+    }
+    console.log("lift: ", lift, "sets: ", sets, "weight: ", weight, "units: ", units)
+    const uploadData = { lift, weight, sets, reps, units };
+    updateLiftData(uploadData);
   }
 
   return (
