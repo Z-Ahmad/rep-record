@@ -12,7 +12,12 @@ const LoginButton = () => {
     if (user) {
       // User is already authenticated, perform logout
       console.log("Logging out:", user)
-      await signOutUser();
+      const logoutPromise = signOutUser();
+      toast.promise(logoutPromise, {
+        loading: "Logging out...",
+        success: "Logged out!",
+        error: "Could not log out"
+      });
     } else {
       // User is not authenticated, perform login
       try {
